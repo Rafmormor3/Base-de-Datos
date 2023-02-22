@@ -115,11 +115,15 @@ GROUP BY A.DESCRIP  ;
 
 --23.Número de facturas de cada uno de los clientes cuyo código está entre 150 y 300 (se debe mostrar este código), 
 --con cada IVA distinto que se les ha aplicado.
-SELECT 
+SELECT COUNT(F.CODFAC), F.CODCLI, F.IVA  
 FROM FACTURAS f 
+WHERE F.CODCLI BETWEEN 150 AND 300
+GROUP BY F.CODCLI, F.IVA  ;
 
 
 --24.Media del importe de las facturas, sin tener en cuenta impuestos ni descuentos.
-
+SELECT AVG(NVL(LF.CANT,0)*NVL(A.PRECIO,0)) 
+FROM ARTICULOS a, LINEAS_FAC lf 
+WHERE A.CODART = LF.CODART ;
 
 
